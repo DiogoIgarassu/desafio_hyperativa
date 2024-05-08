@@ -32,7 +32,6 @@ class CadastrarLoteView(APIView):
             else:
                 numero_cartao = linha[7:27].strip().decode()
                 if len(numero_cartao) > 10:
-                    print('\033[91m', numero_cartao)
                     num_cartoes.append(numero_cartao)
 
         for numero_cartao in num_cartoes:
@@ -76,7 +75,6 @@ def criar_usuario(request):
 @api_view(['GET'])
 def listar_usuarios(request):
     usuarios = User.objects.all()
-    print("AQUIIIII", User.objects.all())
     serializer = UserSerializer(usuarios, many=True)
     return Response(serializer.data)
 

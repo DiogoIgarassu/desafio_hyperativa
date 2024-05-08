@@ -1,5 +1,6 @@
 from django.test import TestCase
 from .models import User, CadastraoCartao, LoteCartoes
+from rest_framework.exceptions import AuthenticationFailed
 from .serializers import (
     UserSerializer,
     LoginSerializer,
@@ -48,12 +49,11 @@ class LoginSerializerTest(TestCase):
         self.assertEqual(validated_data['email'], 'test@example.com')
 
     def test_login_invalid_credentials(self):
-        # Testar login com credenciais inválidas
         data = {'email': 'nonexistent@example.com',
                 'password': 'wrong_password'}
         serializer = LoginSerializer(data=data)
-        self.assertFalse(serializer.is_valid())
-        self.assertIn('detail', serializer.errors)
+        with self.assertRaises(AuthenticationFailed):
+            serializer.is_valid(raise_exception=True)
 
 
 class CadastrarCartaoSerializerTest(TestCase):

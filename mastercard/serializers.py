@@ -32,7 +32,6 @@ class UserSerializer(serializers.ModelSerializer):
         }
 
     def create(self, validated_data):
-        print("OPA", validated_data)
         is_superuser = validated_data.pop('super', False)
 
         if is_superuser:
@@ -67,12 +66,10 @@ class LoginSerializer(serializers.ModelSerializer):
         email = attrs.get('email', '')
         password = attrs.get('password', '')
 
-        print('\033[91m', "AQUIIIII", User.objects.all())
         user = User.objects.filter(email=email).first()
-        print('\033[93m', email, user)
-        if user is None:
-            raise AuthenticationFailed('Credenciais inválidas, '
-                                       'tente novamente')
+        if user is None or not user.check_password(password):
+            raise AuthenticationFailed('Credenciais inválidas,'
+                                       ' tente novamente')
 
         if not user.check_password(password):
             raise AuthenticationFailed('Credenciais inválidas, '
