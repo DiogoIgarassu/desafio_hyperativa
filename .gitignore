@@ -1,0 +1,28 @@
+# Arquivos de bytecode do Python
+__pycache__/
+*.pyc
+
+# Ambiente virtual
+venv/
+.env
+
+# Arquivos de configuração
+*.ini
+*.cfg
+
+# Arquivos de registro e saída
+*.log
+*.csv
+
+# Arquivos de dados
+*.db
+*.sqlite3
+
+# Arquivos de mídia e uploads
+media/
+static/uploads/
+
+# Dependências
+node_modules/
+*.lock
+*.egg-info/
