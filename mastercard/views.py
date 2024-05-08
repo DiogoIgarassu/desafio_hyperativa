@@ -10,6 +10,16 @@ from datetime import datetime
 from .serializers import UserSerializer, LoginSerializer, LoteCartoesSerializer
 
 
+class ConsultaCartoesView(generics.ListAPIView):
+    serializer_class = CadastrarCartaoSerializer
+    queryset = CadastraoCartao.objects.all()
+
+
+class ConsultaLotesView(generics.ListAPIView):
+    serializer_class = LoteCartoesSerializer
+    queryset = LoteCartoes.objects.all()
+
+
 class CadastrarLoteView(APIView):
     def post(self, request):
         arquivo_txt = request.FILES.get('arquivo_txt')

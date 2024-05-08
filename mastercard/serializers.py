@@ -2,8 +2,7 @@ from rest_framework import serializers
 from .models import User
 from rest_framework.exceptions import AuthenticationFailed
 from django.utils import timezone
-from .models import CadastraoCartao
-from .models import LoteCartoes
+from .models import CadastraoCartao, LoteCartoes
 
 
 class LoteCartoesSerializer(serializers.ModelSerializer):
